@@ -18,10 +18,12 @@ public class Negozio {
 		return prodotti.get(codice).setSconto(sconto);
 	}
 	
+	//restituisco un singolo prodotto
 	public Prodotto getProdotto(String codice) {
 		return prodotti.get(codice);
 	}
 	
+	//restituisco il codice del prodotto preso grazie al codice passato come parametro
 	public String getCodice(String codice) {
 		String codiceProdotto="";
 		if(prodotti.containsKey(codice)) {
@@ -30,6 +32,7 @@ public class Negozio {
 		return codiceProdotto;
 	}
 	
+	//restituisco la quantia del prodotto grazie al codice passato come parametro
 	public int getQuantita(String codice){
 		return prodotti.get(codice).getQuantitaDisponibile();
 	}
