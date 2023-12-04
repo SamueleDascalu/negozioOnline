@@ -9,7 +9,12 @@ public class Negozio {
 	//getters e setters
 	//setter per l'inserimento di un prodotto alla volta nell'hashmap
 	public void setProdotti(String codice, Prodotto prodotto) {
-		prodotti.put(codice, prodotto);
+		//controllo che il codice della chiave sia uguale a quello del prodotto
+		if(codice.equals(prodotto.getCodice())){
+			prodotti.put(codice, prodotto);
+		} else {
+			System.out.println("I codici sono diversi.");
+		}
 	}
 	
 	//questo metodo restituisce lo stato dell'operazione attraverso il metodo setSconto
@@ -26,6 +31,7 @@ public class Negozio {
 	//restituisco il codice del prodotto preso grazie al codice passato come parametro
 	public String getCodice(String codice) {
 		String codiceProdotto="";
+		//se l'hashmap prodotti contiene la chiave inserita come parametro la restituisco
 		if(prodotti.containsKey(codice)) {
 			codiceProdotto=prodotti.get(codice).getCodice();
 		}
