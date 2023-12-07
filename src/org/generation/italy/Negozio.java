@@ -1,6 +1,7 @@
 package org.generation.italy;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Negozio {
 	//hashmap dove vengono inseriti i prodotti (uno alla volta)
@@ -17,15 +18,20 @@ public class Negozio {
 		}
 	}
 	
+	//si usa un iterable per poter accedere in sola lettura all'hashmap prodotti da altre classi
+	public Iterable<Prodotto> getElencoProdotti(){
+		return new Iterable<Prodotto>() {
+			@Override
+			public Iterator<Prodotto> iterator() {
+				return prodotti.values().iterator();
+			}
+		};
+	}
+	
 	//questo metodo restituisce lo stato dell'operazione attraverso il metodo setSconto
 	//della classe Prodotto
 	public boolean setSconto(String codice, float sconto) {
 		return prodotti.get(codice).setSconto(sconto);
-	}
-	
-	//restituisco un singolo prodotto
-	public Prodotto getProdotto(String codice) {
-		return prodotti.get(codice);
 	}
 	
 	//restituisco il codice del prodotto preso grazie al codice passato come parametro
@@ -43,9 +49,19 @@ public class Negozio {
 		return prodotti.get(codice).getQuantitaDisponibile();
 	}
 	
-	public void visualizzaProdotti() {
-		for(Prodotto prodotto:prodotti.values()) {
-			prodotto.visualizzaDati(); 
-		}
+	public String getDescrizioneNegozio(String codice) {
+		return prodotti.get(codice).getDescrizione();
+	}
+	
+	public float getPrezzoNegozio(String codice) {
+		return prodotti.get(codice).getPrezzo();
+	}
+	
+	public float getScontoNegozio(String codice) {
+		return prodotti.get(codice).getSconto();
+	}
+	
+	public void setQuantitaDopoVenditaNegozio(String codice, int quantitaAcquistata) {
+		prodotti.get(codice).setQuantitaDopoVendita(quantitaAcquistata);
 	}
 }

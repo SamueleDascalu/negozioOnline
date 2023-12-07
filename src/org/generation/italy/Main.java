@@ -59,6 +59,7 @@ public class Main {
 				boolean statoPrezzo = prodotto.setPrezzo(prezzo);
 				//si itera sul while solo se il prezzo inserito e falso
 				while (statoPrezzo == false) {
+					System.out.println("Inserisci un prezzo valido.");
 					System.out.print("Prezzo: ");
 					prezzo = Float.parseFloat(scanner.nextLine());
 					statoPrezzo = prodotto.setPrezzo(prezzo);
@@ -69,6 +70,7 @@ public class Main {
 				//stesso controllo usato per il prezzo
 				boolean statoSconto = prodotto.setSconto(sconto);
 				while (statoSconto == false) {
+					System.out.println("Lo sconto deve essere compreso tra 0 e 100.");
 					System.out.print("Sconto: ");
 					sconto = Float.parseFloat(scanner.nextLine());
 					statoSconto = prodotto.setSconto(sconto);
@@ -80,6 +82,7 @@ public class Main {
 				//stesso controllo usato per il prezzo e lo sconto
 				boolean statoQuantita = prodotto.setQuantitaDisponibile(quantita);
 				while (statoQuantita == false) {
+					System.out.println("La quantita deve essere maggiore di 0.");
 					System.out.print("Quantita disponibile: ");
 					quantita = Integer.parseInt(scanner.nextLine());
 					statoQuantita = prodotto.setQuantitaDisponibile(quantita);
@@ -90,7 +93,10 @@ public class Main {
 			//elenco prodotti
 			case "2":
 				System.out.println("Prodotti disponibili:");
-				negozio.visualizzaProdotti();
+				//usare l'iterable in Negozio
+				for(Prodotto prod:negozio.getElencoProdotti()) {
+					System.out.println("\nCodice: "+prod.getCodice()+"\nDescrizione: "+prod.getDescrizione()+"\nPrezzo: "+prod.getPrezzo()+"Sconto: "+prod.getSconto()+"\nQuantita disponibile: "+prod.getQuantitaDisponibile()+"\n");
+				}
 				break;
 			//applica sconto
 			case "3":
@@ -152,9 +158,9 @@ public class Main {
 				if (negozio.getCodice(codice).equals(codice)) {
 					//prendo i dati che mi servono per quello specifico prodotto con appositi
 					//metodi e grazie al codice del prodotto
-					descrizione = negozio.getProdotto(codice).getDescrizione();
-					prezzo = negozio.getProdotto(codice).getPrezzo();
-					sconto=negozio.getProdotto(codice).getSconto();
+					descrizione = negozio.getDescrizioneNegozio(codice);
+					prezzo = negozio.getPrezzoNegozio(codice);
+					sconto=negozio.getScontoNegozio(codice);
 					int quantitaDisponibile=negozio.getQuantita(codice);
 					//calcolo il prezzo scontato
 					Float prezzoScontato=prezzo - ((prezzo*sconto)/100);
@@ -182,7 +188,7 @@ public class Main {
 					}
 					if(quantitaDisponibile>=quantita) {
 						//setto la quantita aggiornata del prodotto nel negozio
-						negozio.getProdotto(codice).setQuantitaDopoVendita(quantita);
+						negozio.setQuantitaDopoVenditaNegozio(codice, quantita);
 						//prendo la quantita aggiornata e la mostro
 						quantitaDisponibile = negozio.getQuantita(codice);
 						System.out.println("Rimangono "+quantitaDisponibile+" unita.");

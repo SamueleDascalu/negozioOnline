@@ -41,8 +41,6 @@ public class Prodotto {
 			this.prezzo = prezzo;
 			//se il prezzo inserito dall'utente é maggiore di 0 lo stato diventa vero
 			stato=true;
-		} else {
-			System.out.println("Il prezzo deve essere maggiore di 0.");
 		}
 		return stato;
 	}
@@ -57,8 +55,6 @@ public class Prodotto {
 		if(sconto>=0&&sconto<=100) {
 			this.sconto = sconto;
 			stato=true;
-		} else {
-			System.out.println("Lo sconto deve essere compreso tra 0 e 100.");
 		}
 		return stato;
 	}
@@ -73,8 +69,6 @@ public class Prodotto {
 		if(quantitaDisponibile>0) {
 			this.quantitaDisponibile = quantitaDisponibile;
 			stato=true;
-		} else {
-			System.out.println("La quantità deve essere maggiore di 0.");
 		}
 		return stato;
 	}
@@ -83,10 +77,5 @@ public class Prodotto {
 		if(quantitaDisponibile>0) {
 			quantitaDisponibile-=quantitaAcquistata;
 		}
-	}
-	
-	//metodo per la visualizzazione dei dati del prodotto
-	public void visualizzaDati() {
-		System.out.print("\nCodice: "+codice+"\n"+"Descizione: "+descrizione+"\nPrezzo: "+prezzo+"\nSconto: "+sconto+"\nQuantita disponibile: "+quantitaDisponibile+"\n\n");
 	}
 }
